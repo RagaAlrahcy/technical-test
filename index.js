@@ -2,7 +2,6 @@ const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const { buildSchema } = require('graphql');
 
-// 1. Definisikan Schema
 const schema = buildSchema(`
   type Product {
     id: ID!
@@ -33,7 +32,6 @@ const schema = buildSchema(`
   }
 `);
 
-// 2. Mock Data
 const products = [
   { id: '1', name: 'Laptop', price: 15000000 },
   { id: '2', name: 'Headphone', price: 200000 },
@@ -50,7 +48,6 @@ const orders = [
   { id: '102', userId: '2', productIds: ['2', '3'] },
 ];
 
-// 3. Resolver
 const root = {
   products: () => products,
   product: ({ id }) => products.find((p) => p.id === id),
@@ -82,7 +79,6 @@ const root = {
   },
 };
 
-// 4. Setup Server
 const app = express();
 app.use(
   '/graphql',
